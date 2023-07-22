@@ -183,6 +183,7 @@ class LRUCache {
   mutable port::Mutex mutex_;
   size_t usage_ GUARDED_BY(mutex_);
 
+  //最近访问的在in_use_上，不常访问的在lru_上，通过Ref()和Unref进行切换，便于删除处理
   // Dummy head of LRU list.
   // lru.prev is newest entry, lru.next is oldest entry.
   // Entries have refs==1 and in_cache==true.
